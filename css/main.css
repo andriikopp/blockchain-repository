@@ -1,0 +1,17 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    margin-top: 1%;
+}
+
+.container {
+    margin: 0px;
+    max-width: 100%;
+}
+
+.tab-pane {
+    margin-top: 1%;
+}
+
+#web3-interaction {
+    margin-bottom: 1%;
+}
