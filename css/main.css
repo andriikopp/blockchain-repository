@@ -15,3 +15,7 @@ body {
 #web3-interaction {
     margin-bottom: 1%;
 }
+
+.badge-pill {
+    font-size: 14px;
+}

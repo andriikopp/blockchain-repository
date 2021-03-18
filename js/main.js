@@ -40,6 +40,23 @@ const NeblioBlockchainDAO = {
         });
 
         return tokenIcon;
+    },
+
+    getTokenIssuanceData: function(tokenId) {
+        const getTokenIssuanceDataURL = "https://ntp1node.nebl.io/testnet/ntp1/tokenmetadata/" + tokenId;
+
+        let tokenIssuanceData = null;
+
+        $.ajaxSetup({ async: false });
+        $.get(getTokenIssuanceDataURL, function(data) {
+            tokenIssuanceData = {
+                "address": data.issueAddress,
+                "issuer": data.metadataOfIssuance.data.issuer,
+                "tx": data.issuanceTxid
+            };
+        });
+
+        return tokenIssuanceData;
     }
 };
 
@@ -51,6 +68,21 @@ const LocalStorageDAO = {
 
     getRegisteredAssets: function() {
         $("#reg-list").html(localStorage.getItem("regAssets"));
+    }
+};
+
+const EnterpriseModelsContractDAO = {
+    address: "0x1fc7aba9679c8e35e723cc82f8b5e39889692198",
+
+    abi: `[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"pAsset","type":"string"}],"name":"getPermission","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pAddress","type":"address"},{"internalType":"string","name":"pAsset","type":"string"},{"internalType":"string","name":"pKey","type":"string"}],"name":"setPermission","outputs":[],"stateMutability":"nonpayable","type":"function"}]`,
+
+    getPermission: function(assetId, decryption) {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.getPermission(assetId).call({ from: Web3Account.address }, function(err, data) {
+            decryption(data);
+        });
     }
 };
 
@@ -75,17 +107,22 @@ const loginUsingWeb3 = function() {
 
 const encryptAsset = function() {
     const rawAsset = $("#raw-asset").val();
+    const key = $("#raw-key").val();
 
-    if (Web3Account.address !== null && rawAsset.length > 0) {
-        const encryptedAsset = CryptoJS.AES.encrypt(rawAsset, Web3Account.address);
+    if (Web3Account.address !== null && rawAsset.length > 0 && key.length > 0) {
+        const encryptedAsset = CryptoJS.AES.encrypt(rawAsset, key);
 
         $("#encrypted-asset").val(encryptedAsset);
     }
 };
 
-const decryptAsset = function(encryptedAsset) {
+const decryptAsset = function(encryptedAsset, key) {
     if (Web3Account.address !== null) {
-        return CryptoJS.AES.decrypt(encryptedAsset, Web3Account.address).toString(CryptoJS.enc.Utf8);
+        try {
+            return CryptoJS.AES.decrypt(encryptedAsset, key).toString(CryptoJS.enc.Utf8);
+        } catch {
+            alert("Invalid decryption key!");
+        }
     }
 }
 
@@ -96,6 +133,7 @@ const findAsset = function() {
         if (tokenId.length > 0) {
             const metaData = NeblioBlockchainDAO.getTokenMetadata(tokenId);
             const icon = NeblioBlockchainDAO.getTokenIcon(tokenId);
+            const issuanceData = NeblioBlockchainDAO.getTokenIssuanceData(tokenId);
 
             for (let i = 0; i < metaData.length; i++) {
                 const key = metaData[i]["key"];
@@ -106,10 +144,11 @@ const findAsset = function() {
                         $("#model-title").val(value);
                         break;
                     case "File":
-                        const decryptedAsset = decryptAsset(value);
+                        EnterpriseModelsContractDAO.getPermission(tokenId, function(key) {
+                            const decryptedAsset = decryptAsset(value, key);
 
-                        $("#model-file").attr("onclick",
-                            `window.open('${decryptedAsset}', 'newwindow', 'width=640,height=480'); return false;`);
+                            $("#model-file").text(decryptedAsset);
+                        });
 
                         break;
                     case "Industry":
@@ -125,6 +164,12 @@ const findAsset = function() {
             }
 
             $("#asset-icon").html(`<br><img src="${icon}" width="300">`);
+
+            $("#iss-addr").attr("href", "https://testnet-explorer.nebl.io/address/" + issuanceData.address);
+            $("#iss-addr").text(issuanceData.issuer);
+
+            $("#iss-tx").attr("href", "https://testnet-explorer.nebl.io/tx/" + issuanceData.tx);
+            $("#iss-tx").text(issuanceData.tx);
         }
     }
 };

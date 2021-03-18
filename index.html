@@ -26,7 +26,7 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-find" role="tab" aria-controls="nav-find" aria-selected="false">Assets explorer</a>
-                <a class="nav-item nav-link" id="nav-encrypt-tab" data-toggle="tab" href="#nav-encrypt" role="tab" aria-controls="nav-encrypt" aria-selected="false">Encrypt content</a>
+                <a class="nav-item nav-link" id="nav-encrypt-tab" data-toggle="tab" href="#nav-encrypt" role="tab" aria-controls="nav-encrypt" aria-selected="false">Deploy asset (manual)</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-content">
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label for="model-file" class="col-sm-2 col-form-label">File</label>
                                 <div class="col-sm-10">
-                                    <button type="button" class="btn btn-link" id="model-file" onclick="">Link</button>
+                                    <textarea readonly class="form-control" id="model-file" rows="5">N/A</textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -91,12 +91,50 @@
                                     <input type="text" readonly class="form-control" id="model-type" value="N/A">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="model-type" class="col-sm-2 col-form-label">Issuance data</label>
+                                <div class="col-sm-10">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Property</th>
+                                                <th scope="col">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Issuer</th>
+                                                <td class="text-muted">
+                                                    <a href="javascript:void(0);" id="iss-addr" target="_blank">N/A</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Transaction</th>
+                                                <td class="text-muted">
+                                                    <a href="javascript:void(0);" id="iss-tx" target="_blank">N/A</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-encrypt" role="tabpanel" aria-labelledby="nav-encrypt-tab">
+                <p class="text-muted">
+                    <span class="badge badge-secondary badge-pill">1</span> Encrypt content that should be deployed
+                    <br>
+                    <small>Use the text-based content or shared links</small>
+                </p>
                 <form>
+                    <div class="form-group row">
+                        <label for="raw-key" class="col-sm-2 col-form-label">Encryption key</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="raw-key">
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -113,6 +151,70 @@
                     </div>
                     <button type="button" class="btn btn-info" id="encrypt-asset">Encrypt</button>
                 </form>
+                <br>
+                <p class="text-muted">
+                    <span class="badge badge-secondary badge-pill">2</span> Login to <a href="https://orion.nebl.io/" target="_blank">Orion</a> wallet and create NTP1 token (of quantity 1) with following metadata
+                    <br>
+                    <small>You should have some NEBL on Neblio testnet sufficient to send transaction</small>
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Key</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Title</th>
+                            <td class="text-muted">Title of the asset</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">File</th>
+                            <td class="text-muted">Encrypted content of the asset</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Industry</th>
+                            <td class="text-muted">Domain to which the asset belongs</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Organization</th>
+                            <td class="text-muted">Who is the author of the asset</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Type</th>
+                            <td class="text-muted">Kind of the asset</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-muted">
+                    <span class="badge badge-secondary badge-pill">3</span> Use this Ethereum <a href="https://ropsten.etherscan.io/address/0x1fc7aba9679c8e35e723cc82f8b5e39889692198#writeContract" target="_blank">smart contract</a> to set permissions
+                    for the deployed asset by specifying following properties
+                    <br>
+                    <small>You should have some ETH on Ropsten testnet sufficient to send transaction</small>
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Property</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">pAddress (address)</th>
+                            <td class="text-muted">Address of each person granted to access the deployed asset</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">pAsset (string)</th>
+                            <td class="text-muted">ID of the deployed asset (NTP1 token ID)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">pKey (string)</th>
+                            <td class="text-muted">Encryption key (used in the beginning)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
