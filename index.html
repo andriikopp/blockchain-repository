@@ -13,6 +13,12 @@
 </head>
 
 <body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">Demo</a>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span>Demo</span>
+    </nav>
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -25,16 +31,66 @@
             <a class="btn btn-secondary" target="_blank" href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" role="button">Smart Contract</a>
         </div>
         <div id="message"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="list-group" id="models-list">
+
+        <ul class="nav nav-tabs" id="tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="true">Catalog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="encryption-tab" data-toggle="tab" href="#encryption" role="tab" aria-controls="encryption" aria-selected="false">Encryption</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="list-group" id="models-list">
+                            </div>
+                        </div>
+                        <div class="col-sm-8" id="selected-model"></div>
                     </div>
                 </div>
-                <div class="col-sm-8" id="selected-model"></div>
+            </div>
+            <div class="tab-pane fade" id="encryption" role="tabpanel" aria-labelledby="encryption-tab">
+                <p>
+                    <span class="badge badge-pill badge-info">1</span> Encrypt a link to a shared model
+                </p>
+                <form>
+                    <div class="form-group">
+                        <label for="original">Original</label>
+                        <textarea class="form-control" id="original" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="encrypted">Encrypted</label>
+                        <textarea class="form-control" id="encrypted" rows="3" readonly></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="use-sha256">Use SHA256</button>
+                </form>
+                <br>
+                <p>
+                    <span class="badge badge-pill badge-info">2</span> Use this <a href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" target="_blank">smart contract</a> to publish a model
+                </p>
+                <ul class="list-group">
+                    <li class="list-group-item">Click "Contracts" and choose "Write Contract"</li>
+                    <li class="list-group-item">Select "Add Model"</li>
+                    <li class="list-group-item">Input model properties including encrypted link and click "Write"</li>
+                </ul>
+                <br>
+                <p>
+                    <span class="badge badge-pill badge-info">3</span> Use this <a href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" target="_blank">smart contract</a> to grant user access
+                </p>
+                <ul class="list-group">
+                    <li class="list-group-item">Click "Contracts" and choose "Write Contract"</li>
+                    <li class="list-group-item">Select "Give Permission"</li>
+                    <li class="list-group-item">Input user's address and click "Write"</li>
+                </ul>
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>

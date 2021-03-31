@@ -35,7 +35,7 @@ const ModelsContractDAO = {
                         $("#message").empty();
 
                         if (accessGranted) {
-                            $("#message").append(`<div class="alert alert-info" role="alert">Access granted!</div>`);
+                            $("#message").html(`<div class="alert alert-success" role="alert">Access granted!</div>`);
 
                             const length = data;
 
@@ -55,14 +55,14 @@ const ModelsContractDAO = {
                                 }
                             });
                         } else {
-                            $("#message").append(`<div class="alert alert-danger" role="alert">Access denied!</div>`);
+                            $("#message").html(`<div class="alert alert-danger" role="alert">Access denied!</div>`);
                         }
                     } else {
-                        $("#message").append(`<div class="alert alert-danger" role="alert">${err}</div>`);
+                        $("#message").html(`<div class="alert alert-danger" role="alert">${err}</div>`);
                     }
                 });
             } else {
-                $("#message").append(`<div class="alert alert-danger" role="alert">${err}</div>`);
+                $("#message").html(`<div class="alert alert-danger" role="alert">${err}</div>`);
             }
         });
     }
@@ -91,7 +91,23 @@ const showModelData = function(title, link, hash) {
                 <textarea class="form-control" id="model-hash" rows="3" readonly>${hash}</textarea>
             </div>
         </div>
-    </form>`);
+        <button type="button" class="btn btn-primary" onclick="checkAuthenticity('${link}', '${hash}');">Check Authenticity</button>
+    </form>
+    <br>
+    <div id="authenticity-info"></div>`);
+}
+
+const checkAuthenticity = function(link, hash) {
+    $.get(link, function(data) {
+        const content = data.trim();
+        const check = CryptoJS.SHA256(content).toString();
+
+        if (hash === check.toUpperCase()) {
+            $("#authenticity-info").html(`<div class="alert alert-success" role="alert">File is authentic!</div>`);
+        } else {
+            $("#authenticity-info").html(`<div class="alert alert-danger" role="alert">File is corrupted!</div>`);
+        }
+    });
 }
 
 const connectWeb3Provider = function() {
@@ -110,7 +126,17 @@ const loginUsingWeb3 = function() {
     $("#user-address").text(Web3Account.address);
 };
 
+const encryptSHA256 = function() {
+    const input = $("#original").val();
+    const output = CryptoJS.SHA256(input).toString();
+    $("#encrypted").val(output);
+    return false;
+}
+
 // ========================================== Event-handlers ===========================================
 
 $("#connect-web3").click(connectWeb3Provider);
 $("#login-web3").click(loginUsingWeb3);
+$("#use-sha256").click(encryptSHA256);
+
+$("#message").append(`<div class="alert alert-warning" role="alert">Access undefined!</div>`);
