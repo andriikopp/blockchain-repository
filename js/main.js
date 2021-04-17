@@ -26,41 +26,32 @@ const ModelsContractDAO = {
         contract.methods.CheckMyPermission().call({ from: Web3Account.address }, function(err, data) {
             $("#models-list").empty();
             $("#selected-model").empty();
+            $("#message").empty();
 
             if (err === null) {
                 const accessGranted = data;
 
-                contract.methods.GetModelsCount().call({ from: Web3Account.address }, function(err, data) {
-                    if (err === null) {
-                        $("#message").empty();
+                if (accessGranted) {
+                    $("#message").html(`<div class="alert alert-success" role="alert">Access granted!</div>`);
 
-                        if (accessGranted) {
-                            $("#message").html(`<div class="alert alert-success" role="alert">Access granted!</div>`);
+                    contract.methods.ReadModels().call({ from: Web3Account.address }, function(err, data) {
+                        if (err === null) {
+                            $("#models-list").append(`<li class="list-group-item active">Business process models</li>`);
 
-                            const length = data;
+                            for (let i = 0; i < data.length; i++) {
+                                const title = data[i][0];
+                                const link = data[i][1];
+                                const hash = data[i][2];
 
-                            contract.methods.ReadModels().call({ from: Web3Account.address }, function(err, data) {
-                                if (err === null) {
-                                    $("#models-list").append(`<li class="list-group-item active">Models</li>`);
-
-                                    for (let i = 0; i < length; i++) {
-                                        const title = data[i][0];
-                                        const link = data[i][1];
-                                        const hash = data[i][2];
-
-                                        $("#models-list").append(`<a href="javascript:void(0);" 
-                                            class="list-group-item list-group-item-action" 
-                                            onclick="showModelData('${title}', '${link}', '${hash}');">${title}</a>`);
-                                    }
-                                }
-                            });
-                        } else {
-                            $("#message").html(`<div class="alert alert-danger" role="alert">Access denied!</div>`);
+                                $("#models-list").append(`<a href="javascript:void(0);" 
+                                        class="list-group-item list-group-item-action" 
+                                        onclick="showModelData('${title}', '${link}', '${hash}');">${title}</a>`);
+                            }
                         }
-                    } else {
-                        $("#message").html(`<div class="alert alert-danger" role="alert">${err}</div>`);
-                    }
-                });
+                    });
+                } else {
+                    $("#message").html(`<div class="alert alert-danger" role="alert">Access denied!</div>`);
+                }
             } else {
                 $("#message").html(`<div class="alert alert-danger" role="alert">${err}</div>`);
             }
@@ -102,10 +93,10 @@ const checkAuthenticity = function(link, hash) {
         const content = data.trim();
         const check = CryptoJS.SHA256(content).toString();
 
-        if (hash === check.toUpperCase()) {
-            $("#authenticity-info").html(`<div class="alert alert-success" role="alert">File is authentic!</div>`);
+        if (hash === check.toLowerCase()) {
+            $("#authenticity-info").html(`<div class="alert alert-success" role="alert">Business process model is authentic!</div>`);
         } else {
-            $("#authenticity-info").html(`<div class="alert alert-danger" role="alert">File is corrupted!</div>`);
+            $("#authenticity-info").html(`<div class="alert alert-danger" role="alert">Business process model is not authentic!</div>`);
         }
     });
 }
