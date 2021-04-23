@@ -24,3 +24,9 @@ body {
 .sticky-top {
     margin-top: -1%;
 }
+
+#title {
+    background-image: url('/img/bg.png');
+    height: 200px;
+    padding-top: 80px;
+}
