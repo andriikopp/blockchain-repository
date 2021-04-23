@@ -84,7 +84,6 @@ const showModelData = function(title, link, hash) {
     </form>
     <br>
     <div id="authenticity-info"></div>
-    <br>
     <div class="canvas">
         <div id="js-canvas"></div>
     </div>`);
