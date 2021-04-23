@@ -85,7 +85,25 @@ const showModelData = function(title, link, hash) {
         <button type="button" class="btn btn-primary" onclick="checkAuthenticity('${link}', '${hash}');">Check Authenticity</button>
     </form>
     <br>
-    <div id="authenticity-info"></div>`);
+    <div id="authenticity-info"></div>
+    <br>
+    <div class="canvas">
+        <div id="js-canvas"></div>
+    </div>`);
+
+    const viewer = new BpmnJS({
+        container: $('#js-canvas'),
+        height: 600
+    });
+
+    $.ajax(link, { dataType: "text" }).done(async function(xml) {
+        try {
+            await viewer.importXML(xml);
+            viewer.get('canvas').zoom('fit-viewport');
+        } catch (err) {
+            alert(err);
+        }
+    });
 }
 
 const checkAuthenticity = function(link, hash) {
@@ -111,7 +129,18 @@ const loginUsingWeb3 = function() {
     if (Web3Account.address === null) {
         Web3Account.address = "Please authorize to access your account";
     } else {
-        ModelsContractDAO.readAllModels();
+        const contractAddress = $("#contractAddr").val();
+        const contractABI = $("#contractABI").val();
+
+        if ((contractAddress !== undefined && contractAddress !== null && contractAddress.length > 0) &&
+            (contractABI !== undefined && contractABI !== null && contractABI.length > 0)) {
+            ModelsContractDAO.address = contractAddress;
+            ModelsContractDAO.abi = contractABI;
+
+            ModelsContractDAO.readAllModels();
+        } else {
+            $("#message").html(`<div class="alert alert-danger" role="alert">Smart contract cannot be accessed!</div>`);
+        }
     }
 
     $("#user-address").text(Web3Account.address);

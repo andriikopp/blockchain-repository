@@ -17,7 +17,7 @@
         <a class="navbar-brand" href="#">🔷 EtherBPMN</a>
     </nav>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <span>🔷 EtherBPMN</span>
+        <span>🔷 EtherBPMN, <script>document.write(new Date().getFullYear());</script></span>
     </nav>
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -25,6 +25,14 @@
                 <li class="breadcrumb-item active" aria-current="page" id="user-address">N/A</li>
             </ol>
         </nav>
+        <div class="form-group">
+            <label for="contractAddr">Business process model collection (smart-contract) address</label>
+            <input type="text" class="form-control" id="contractAddr" value="0xb3d647380638baa6b569652758c11a5d5a28ce4d">
+        </div>
+        <div class="form-group">
+            <label for="contractAddr">Business process model collection (smart-contract) ABI</label>
+            <input type="text" class="form-control" id="contractABI" value='[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_Title","type":"string"},{"internalType":"string","name":"_Link","type":"string"},{"internalType":"string","name":"_Hash","type":"string"}],"name":"AddModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"CheckMyPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"CheckPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"GetModelsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"GivePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"ReadModels","outputs":[{"components":[{"internalType":"string","name":"Title","type":"string"},{"internalType":"string","name":"Link","type":"string"},{"internalType":"string","name":"Hash","type":"string"}],"internalType":"struct ModelsLedger.ModelRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"RemoveModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"RevokePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"},{"internalType":"bool","name":"_Access","type":"bool"}],"name":"SetPermission","outputs":[],"stateMutability":"nonpayable","type":"function"}]'>
+        </div>
         <div id="web3-interaction">
             <button type="button" class="btn btn-primary" id="connect-web3">Connect Web3 Provider</button>
             <button type="button" class="btn btn-info" id="login-web3">Login using Web3</button>
@@ -97,6 +105,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/crypto-js.min.js"></script>
+    <script src="js/bpmn-viewer.development.js"></script>
 
     <script src="js/main.js"></script>
 </body>
