@@ -19,6 +19,23 @@
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <span>🔷 EtherBPMN, <script>document.write(new Date().getFullYear());</script></span>
     </nav>
+
+    <br>
+    <h1 class="text-center">How to use?</h1>
+    <br>
+    <h4 class="text-center">0️⃣ Install MetaMask Chrome <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">extension</a></h4>
+    <br>
+    <h4 class="text-center">1️⃣ Create an account or import an existing one</h4>
+    <br>
+    <h4 class="text-center">2️⃣ Switch to the Ropsten testnet</h4>
+    <br>
+    <h4 class="text-center">3️⃣ Click buttons below to connect Web3 provider (MetaMask) and login using Web3</h4>
+    <br>
+    <h4 class="text-center">4️⃣ Change a smart contract address and an ABI if necessary</h4>
+    <br>
+    <h4 class="text-center">5️⃣ Enjoy collection of BPMN process models!</h4>
+    <br>
+
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -26,26 +43,26 @@
             </ol>
         </nav>
         <div class="form-group">
-            <label for="contractAddr">Business process model collection (smart-contract) address</label>
+            <label for="contractAddr">Business process model collection (smart contract) address</label>
             <input type="text" class="form-control" id="contractAddr" value="0xb3d647380638baa6b569652758c11a5d5a28ce4d">
         </div>
         <div class="form-group">
-            <label for="contractAddr">Business process model collection (smart-contract) ABI</label>
+            <label for="contractAddr">Business process model collection (smart contract) ABI</label>
             <input type="text" class="form-control" id="contractABI" value='[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_Title","type":"string"},{"internalType":"string","name":"_Link","type":"string"},{"internalType":"string","name":"_Hash","type":"string"}],"name":"AddModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"CheckMyPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"CheckPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"GetModelsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"GivePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"ReadModels","outputs":[{"components":[{"internalType":"string","name":"Title","type":"string"},{"internalType":"string","name":"Link","type":"string"},{"internalType":"string","name":"Hash","type":"string"}],"internalType":"struct ModelsLedger.ModelRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"RemoveModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"RevokePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"},{"internalType":"bool","name":"_Access","type":"bool"}],"name":"SetPermission","outputs":[],"stateMutability":"nonpayable","type":"function"}]'>
         </div>
         <div id="web3-interaction">
             <button type="button" class="btn btn-primary" id="connect-web3">Connect Web3 Provider</button>
             <button type="button" class="btn btn-info" id="login-web3">Login using Web3</button>
-            <a class="btn btn-secondary" target="_blank" href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" role="button">Smart Contract</a>
+            <a class="btn btn-secondary" target="_blank" href="https://github.com/andriikopp/blockchain-repository/blob/main/ModelsCollection.sol" role="button">Smart Contract</a>
         </div>
         <div id="message"></div>
 
         <ul class="nav nav-tabs" id="tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="true">Collection</a>
+                <a class="nav-link active" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="true">Read a collection</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="encryption-tab" data-toggle="tab" href="#encryption" role="tab" aria-controls="encryption" aria-selected="false">Publish</a>
+                <a class="nav-link" id="encryption-tab" data-toggle="tab" href="#encryption" role="tab" aria-controls="encryption" aria-selected="false">Publish a collection</a>
             </li>
         </ul>
         <div class="tab-content" id="tabContent">
@@ -62,6 +79,9 @@
             </div>
             <div class="tab-pane fade" id="encryption" role="tabpanel" aria-labelledby="encryption-tab">
                 <p>
+                    <span class="badge badge-pill badge-info">0</span> Deploy the <a target="_blank" href="https://github.com/andriikopp/blockchain-repository/blob/main/ModelsCollection.sol">smart contract</a> to the Ropsten Ethereum testnet
+                </p>
+                <p>
                     <span class="badge badge-pill badge-info">1</span> Get the hash of a BPMN 2.0 file
                 </p>
                 <form>
@@ -77,7 +97,7 @@
                 </form>
                 <br>
                 <p>
-                    <span class="badge badge-pill badge-info">2</span> Use this <a href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" target="_blank">smart contract</a> to publish a business process model
+                    <span class="badge badge-pill badge-info">2</span> Use deployed smart contract to publish a business process model
                 </p>
                 <ul class="list-group">
                     <li class="list-group-item">Click "Contracts" and choose "Write Contract"</li>
@@ -86,13 +106,17 @@
                 </ul>
                 <br>
                 <p>
-                    <span class="badge badge-pill badge-info">3</span> Use this <a href="https://ropsten.etherscan.io/dapp/0xb3d647380638baa6b569652758c11a5d5a28ce4d" target="_blank">smart contract</a> to grant user access
+                    <span class="badge badge-pill badge-info">3</span> Use deployed smart contract to grant user access
                 </p>
                 <ul class="list-group">
                     <li class="list-group-item">Click "Contracts" and choose "Write Contract"</li>
                     <li class="list-group-item">Select "Give Permission"</li>
                     <li class="list-group-item">Input user's Ethereum address and click "Write"</li>
                 </ul>
+                <br>
+                <p>
+                    <span class="badge badge-pill badge-info">4</span> Share the smart contract address and ABI
+                </p>
             </div>
         </div>
     </div>
