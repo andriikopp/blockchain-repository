@@ -81,6 +81,7 @@ const showModelData = function(title, link, hash) {
             </div>
         </div>
         <button type="button" class="btn btn-primary" onclick="checkAuthenticity('${link}', '${hash}');">Check Authenticity</button>
+        <button type="button" class="btn btn-success" onclick="downloadModel('${link}', '${title}');">Downolad</button>
     </form>
     <br>
     <div id="authenticity-info"></div>
@@ -102,6 +103,21 @@ const showModelData = function(title, link, hash) {
         }
     });
 }
+
+const downloadModel = (link, title) => {
+    $.ajax(link, { dataType: "text" }).done(async function(xml) {
+        var element = document.createElement('a');
+        element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(xml));
+        element.setAttribute("download", title + ".bpmn");
+
+        element.style.display = "none";
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    });
+};
 
 const checkAuthenticity = function(link, hash) {
     $.get(link, function(data) {
