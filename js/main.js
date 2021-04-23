@@ -40,10 +40,14 @@ const ModelsContractDAO = {
                                 const title = data[i][0];
                                 const link = data[i][1];
                                 const hash = data[i][2];
+                                const annotation = data[i][3];
+                                const industry = data[i][4];
+                                const timestamp = data[i][5];
 
                                 $("#models-list").append(`<a href="javascript:void(0);" 
                                         class="list-group-item list-group-item-action" 
-                                        onclick="showModelData('${title}', '${link}', '${hash}');" data-toggle="list">${title}</a>`);
+                                        onclick="showModelData('${title}', '${link}', '${hash}', 
+                                        '${annotation}', '${industry}', '${timestamp}');" data-toggle="list">${title}</a>`);
                             }
                         }
                     });
@@ -59,7 +63,9 @@ const ModelsContractDAO = {
 
 // ==================================== Event-handling functions =======================================
 
-const showModelData = function(title, link, hash) {
+const showModelData = function(title, link, hash, annotation, industry, timestamp) {
+    timestamp = new Date(timestamp * 1000).toString();
+
     $("#selected-model").html(`
     <form>
         <div class="form-group row">
@@ -78,6 +84,24 @@ const showModelData = function(title, link, hash) {
             <label for="model-hash" class="col-sm-2 col-form-label">Hash</label>
             <div class="col-sm-10">
                 <textarea class="form-control" id="model-hash" rows="3" readonly>${hash}</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="model-annotation" class="col-sm-2 col-form-label">Annotation</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="model-annotation" rows="5" readonly>${annotation}</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="model-industry" class="col-sm-2 col-form-label">Industry</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="model-industry" readonly value="${industry}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="model-timestamp" class="col-sm-2 col-form-label">Timestamp</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="model-timestamp" readonly value="${timestamp}">
             </div>
         </div>
         <button type="button" class="btn btn-primary" onclick="checkAuthenticity('${link}', '${hash}');">Check Authenticity</button>
