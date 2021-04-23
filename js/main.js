@@ -36,8 +36,6 @@ const ModelsContractDAO = {
 
                     contract.methods.ReadModels().call({ from: Web3Account.address }, function(err, data) {
                         if (err === null) {
-                            $("#models-list").append(`<li class="list-group-item active">Business process models</li>`);
-
                             for (let i = 0; i < data.length; i++) {
                                 const title = data[i][0];
                                 const link = data[i][1];
@@ -45,7 +43,7 @@ const ModelsContractDAO = {
 
                                 $("#models-list").append(`<a href="javascript:void(0);" 
                                         class="list-group-item list-group-item-action" 
-                                        onclick="showModelData('${title}', '${link}', '${hash}');">${title}</a>`);
+                                        onclick="showModelData('${title}', '${link}', '${hash}');" data-toggle="list">${title}</a>`);
                             }
                         }
                     });
