@@ -214,6 +214,8 @@ const searchModel = () => {
 
     if (searchText !== undefined && searchText !== null && searchText.length > 0) {
         ModelsContractDAO.searchModels(searchText);
+    } else {
+        ModelsContractDAO.readAllModels();
     }
 };
 
