@@ -30,3 +30,7 @@ body {
     height: 200px;
     padding-top: 80px;
 }
+
+#search-text {
+    width: 100%;
+}

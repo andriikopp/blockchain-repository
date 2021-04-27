@@ -20,6 +20,10 @@ const ModelsContractDAO = {
     abi: `[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_Title","type":"string"},{"internalType":"string","name":"_Link","type":"string"},{"internalType":"string","name":"_Hash","type":"string"}],"name":"AddModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"CheckMyPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"CheckPermission","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"GetModelsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"GivePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"ReadModels","outputs":[{"components":[{"internalType":"string","name":"Title","type":"string"},{"internalType":"string","name":"Link","type":"string"},{"internalType":"string","name":"Hash","type":"string"}],"internalType":"struct ModelsLedger.ModelRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"RemoveModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"}],"name":"RevokePermission","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_User","type":"address"},{"internalType":"bool","name":"_Access","type":"bool"}],"name":"SetPermission","outputs":[],"stateMutability":"nonpayable","type":"function"}]`,
 
     readAllModels: function() {
+        this.searchModels(null);
+    },
+
+    searchModels: function(searchText) {
         const web3 = new Web3(Web3Account.web3);
         const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
 
@@ -44,10 +48,25 @@ const ModelsContractDAO = {
                                 const industry = data[i][4];
                                 const timestamp = data[i][5];
 
-                                $("#models-list").append(`<a href="javascript:void(0);" 
+                                let showModel = true;
+
+                                if (searchText !== null) {
+                                    showModel = false;
+
+                                    if (title.toLowerCase().includes(searchText.toLowerCase()) ||
+                                        annotation.toLowerCase().includes(searchText.toLowerCase()) ||
+                                        industry.toLowerCase().includes(searchText.toLowerCase())) {
+
+                                        showModel = true;
+                                    }
+                                }
+
+                                if (showModel) {
+                                    $("#models-list").append(`<a href="javascript:void(0);" 
                                         class="list-group-item list-group-item-action" 
                                         onclick="showModelData('${title}', '${link}', '${hash}', 
                                         '${annotation}', '${industry}', '${timestamp}');" data-toggle="list">${title}</a>`);
+                                }
                             }
                         }
                     });
@@ -189,6 +208,14 @@ const encryptSHA256 = function() {
     $("#encrypted").val(output);
     return false;
 }
+
+const searchModel = () => {
+    const searchText = $("#search-text").val();
+
+    if (searchText !== undefined && searchText !== null && searchText.length > 0) {
+        ModelsContractDAO.searchModels(searchText);
+    }
+};
 
 // ========================================== Event-handlers ===========================================
 
