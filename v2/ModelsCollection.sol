@@ -54,7 +54,7 @@ contract ModelsCollection {
             "Public Catering"
         );
         
-        // ERC20 features
+        // token features
         name = "EtherBPMN";
         symbol = "ETHBPMN";
         totalSupply = 10000;
@@ -64,7 +64,7 @@ contract ModelsCollection {
         balanceOf[Owner] = totalSupply;
     }
     
-    // [start] ERC20 features
+    // [start] token features
     mapping (address => uint256) public balanceOf;
     
     event Transfer(address indexed _from, address indexed _to, uint256 value);
@@ -98,9 +98,7 @@ contract ModelsCollection {
     }
     
     function claimAirdrop() public returns (uint revenue) {
-        require(balanceOf[msg.sender] < (block.timestamp - Timestamp) / 86400);
-
-        revenue = ((block.timestamp - Timestamp) / 86400) - balanceOf[msg.sender] + 10;
+        revenue = 10;
         
         balanceOf[msg.sender] += revenue;
         totalSupply += revenue;
@@ -109,7 +107,7 @@ contract ModelsCollection {
         
         return revenue;
     }
-    // [end] ERC20 features
+    // [end] token features
 
     function AddModel(
         string memory _Title,
