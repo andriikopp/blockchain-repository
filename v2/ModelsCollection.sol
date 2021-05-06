@@ -98,7 +98,7 @@ contract ModelsCollection {
     }
     
     function claimAirdrop() public returns (uint revenue) {
-        revenue = ((block.timestamp - Timestamp) / 86400) + 10 - balanceOf[msg.sender];
+        revenue = ((block.timestamp - Timestamp) / 86400) + 10;
         
         balanceOf[msg.sender] += revenue;
         totalSupply += revenue;
