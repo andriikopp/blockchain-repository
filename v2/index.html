@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+
+    <title>ETHBPMN</title>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">🔮 ETHBPMN</a>
+        <a href="javascript:void(0);" class="badge badge-pill badge-info" id="connect-web3">Connect</a>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span>🔮 ETHBPMN, <script>document.write(new Date().getFullYear());</script>
+            <a href="../v2/index.html" class="badge badge-pill badge-info">V2</a>
+            <a href="../index.html" class="badge badge-pill badge-info">V1 (old)</a>
+        </span>
+    </nav>
+
+    <div id="title" class="text-center">
+        <h1>🔮 ETHBPMN</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="badge badge-pill badge-warning mb-1 mt-2">Total supply: <span id="total-supply">0</span> ETHBPMN</span>
+                <span class="badge badge-pill badge-warning mb-2">Liquidity: <span id="liquidity">0</span> ETH</span>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">🏠 <a href="../v2/index.html">Home</a></li>
+                    <li class="list-group-item">💸 <a href="javascript:void(0);" data-toggle="modal" data-target="#exchange">Exchange</a></li>
+                    <li class="list-group-item">💧 <a href="javascript:void(0);" data-toggle="modal" data-target="#airdrop">Airdrop</a> (get free ETHBPMN test tokens)</li>
+                    <li class="list-group-item">🗃️ <a href="https://ropsten.etherscan.io/token/0x7700bC7FF1B04a02215577FD33eee7339Ee466f7" target="_blank">Token Explorer</a></li>
+                </ul>
+                <div class="modal fade" id="exchange" tabindex="-1" role="dialog" aria-labelledby="exchangeLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exchangeLabel">Swap</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Under construction...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger">Swap</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="airdrop" tabindex="-1" role="dialog" aria-labelledby="airdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="airdropLabel">Airdrop</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Get free ETHBPMN test tokens for the next 10 days of access
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="claimTokens();">Claim</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <form onsubmit="searchModel(); return false;" id="search-form" class="mb-2 mt-2">
+                    <span class="badge badge-pill badge-danger mb-2">Balance: <span id="user-balance">0</span> ETHBPMN</span>
+                    <input type="text" class="form-control" id="search-text" placeholder="Search..." aria-describedby="searchHelp">
+                    <small id="searchHelp" class="form-text text-muted">Search models by titles, annotations, and industries</small>
+                </form>
+                <div class="list-group" id="models-list"></div>
+                <div class="modal fade" id="view-model" tabindex="-1" role="dialog" aria-labelledby="viewModelLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewModelLabel">Model details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="selected-model"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/crypto-js.min.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
