@@ -137,6 +137,7 @@ const ModelsContractDAO = {
         contract.methods.readModels().call({ from: Web3Account.address }, function(err, data) {
             if (err === null) {
                 if (data.length < 1) {
+                    $("#search-form").hide();
                     alert("Insufficient balance! Buy ETHBPMN tokens in the exchange or claim through the airdrop!");
                 }
 
@@ -265,6 +266,7 @@ const loginUsingWeb3 = function() {
         $("#connect-web3").text(Web3Account.address.substring(0, 4) + "..." +
             Web3Account.address.substring(Web3Account.address.length - 4));
         ModelsContractDAO.getBalance();
+        $("#search-form").show();
         ModelsContractDAO.readAllModels();
     }
 };
@@ -292,10 +294,20 @@ const claimTokens = () => {
 
 const ethInputChange = () => {
     ModelsContractDAO.buyPrice($("#ethInput").val(), "#tokenOutput");
+
+    $.get("https://api.coingecko.com/api/v3/coins/ethereum", function(data) {
+        const usd = data.market_data.current_price.usd;
+        $("#ethUsd").text(($("#ethInput").val() * usd).toFixed(2));
+    });
 };
 
 const tokenOutputChange = () => {
     ModelsContractDAO.sellPrice($("#tokenOutput").val(), "#ethInput");
+
+    $.get("https://api.coingecko.com/api/v3/coins/ethereum", function(data) {
+        const usd = data.market_data.current_price.usd;
+        $("#ethUsd").text(($("#ethInput").val() * usd).toFixed(2));
+    });
 };
 
 const buyTokens = () => {
@@ -314,3 +326,5 @@ $("#use-sha256").click(encryptSHA256);
 
 ModelsContractDAO.totalSupply();
 ModelsContractDAO.liquidity();
+
+$("#search-form").hide();
