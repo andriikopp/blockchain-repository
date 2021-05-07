@@ -245,6 +245,7 @@ const showModelData = function(title, link, hash, annotation, industry, timestam
         </div>
         <a href="javascript:void(0);" class="badge badge-pill badge-primary" onclick="checkAuthenticity('${link}', '${hash}');">Verify</a>
         <a href="javascript:void(0);" class="badge badge-pill badge-success" onclick="downloadModel('${link}', '${title}');">Downolad</a>
+        <a href="https://fbpmnq-platform.herokuapp.com/index.html?doc=${link}" class="badge badge-pill badge-warning" target="_blank">Analyze</a>
     </form>`);
 }
 
