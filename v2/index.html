@@ -59,11 +59,33 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">🏠 <a href="../v2/index.html">Home</a></li>
                     <li class="list-group-item">💸 <a href="javascript:void(0);" data-toggle="modal" data-target="#exchange">Exchange</a></li>
-                    <li class="list-group-item">💰 <a href="https://ropsten.etherscan.io/dapp/0x28285675fcc8750576C74bF5cA17529133804110#writeContract" target="_blank">Earn</a> (get a reward for sharing a model)</li>
+                    <li class="list-group-item">💰 <a href="https://ropsten.etherscan.io/dapp/0x28285675fcc8750576C74bF5cA17529133804110#writeContract" target="_blank">Earn</a> (get a reward for sharing a model) <a href="javascript:void(0);" data-toggle="modal" data-target="#earn">how?</a></li>
                     <li class="list-group-item">💧 <a href="javascript:void(0);" data-toggle="modal" data-target="#airdrop">Airdrop</a> (claim free ETHBPMN tokens)</li>
                     <li class="list-group-item">🗃️ <a href="https://ropsten.etherscan.io/address/0x28285675fcc8750576C74bF5cA17529133804110#tokentxns" target="_blank">Token Explorer</a></li>
                     <li class="list-group-item">📇 <a href="https://github.com/freebpmnquality" target="_blank">Contact</a></li>
                 </ul>
+                <div class="modal fade" id="earn" tabindex="-1" role="dialog" aria-labelledby="earnLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="earnLabel">How to earn?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                            </div>
+                            <div class="modal-body">
+                                <span class="badge badge-pill badge-info mb-1">1</span> Go to the
+                                <a href="https://ropsten.etherscan.io/dapp/0x28285675fcc8750576C74bF5cA17529133804110#writeContract" target="_blank">Write Contract</a> page and select the "addModel" method.
+                                <br>
+                                <span class="badge badge-pill badge-info mb-1">2</span> Provide details of a BPMN model you want to share (title, link, hash as the <a href="https://emn178.github.io/online-tools/sha256.html" target="_blank">SHA256</a>                                value, brief annotation, and industry name). Put "0" to the "payableAmount" field.
+                                <br>
+                                <span class="badge badge-pill badge-info mb-1">3</span> Click on the "Write" button. Make sure your Web3 wallet (e.g. MetaMask or another one) is connected.
+                                <br>
+                                <span class="badge badge-pill badge-info mb-1">4</span> Soon after a transaction is mined you will receive a reward in ETHBPMN.
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade" id="exchange" tabindex="-1" role="dialog" aria-labelledby="exchangeLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
