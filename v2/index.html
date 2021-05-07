@@ -9,36 +9,44 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
 
-    <title>ETHBPMN</title>
+    <title>EtherBPMN</title>
 </head>
 
 <body>
     <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand" href="#">🔮 ETHBPMN</a>
+        <a class="navbar-brand" href="#">🔮 EtherBPMN</a>
         <a href="javascript:void(0);" class="badge badge-pill badge-info" id="connect-web3">Connect</a>
     </nav>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <span>🔮 ETHBPMN, <script>document.write(new Date().getFullYear());</script>
+        <span>🔮 EtherBPMN, <script>document.write(new Date().getFullYear());</script>
             <a href="../v2/index.html" class="badge badge-pill badge-info">V2</a>
             <a href="../index.html" class="badge badge-pill badge-info">V1 (old)</a>
         </span>
     </nav>
 
     <div id="title" class="text-center">
-        <h1>🔮 ETHBPMN</h1>
+        <h1>🔮 EtherBPMN</h1>
+        <span class="badge badge-pill badge-lite mb-1">Supply</span>
+        <span class="badge badge-pill badge-warning mb-1 mt-2"><span id="total-supply">0</span> ETHBPMN</span>
+        <br>
+        <span class="badge badge-pill badge-lite mb-1">Cap</span>
+        <span class="badge badge-pill badge-secondary mb-1"><span id="liquidity">0</span> ETH</span>
+        <span class="badge badge-pill badge-success mb-2">$ <span id="liquidity-usd">0</span></span>
+        <br>
+        <span class="badge badge-pill badge-lite mb-1">Volume</span>
+        <span class="badge badge-pill badge-secondary mb-1"><span id="total-cap">0</span> ETH</span>
+        <span class="badge badge-pill badge-success mb-2">$ <span id="total-cap-usd">0</span></span>
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <span class="badge badge-pill badge-warning mb-1 mt-2">Total supply: <span id="total-supply">0</span> ETHBPMN</span>
-                <br>
-                <span class="badge badge-pill badge-warning mb-2">Liquidity: <span id="liquidity">0</span> ETH</span>
+                <span class="badge badge-pill badge-danger mt-1 mb-2">Balance: <span id="user-balance">0</span> ETHBPMN</span>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">🏠 <a href="../v2/index.html">Home</a></li>
                     <li class="list-group-item">💸 <a href="javascript:void(0);" data-toggle="modal" data-target="#exchange">Exchange</a></li>
-                    <li class="list-group-item">💧 <a href="javascript:void(0);" data-toggle="modal" data-target="#airdrop">Airdrop</a> (get free ETHBPMN test tokens)</li>
-                    <li class="list-group-item">🗃️ <a href="https://ropsten.etherscan.io/token/0x553dD151063378c4F7Ed39E6F3cA518eA53FC31B" target="_blank">Token Explorer</a></li>
+                    <li class="list-group-item">💧 <a href="javascript:void(0);" data-toggle="modal" data-target="#airdrop">Airdrop</a> (claim free ETHBPMN tokens)</li>
+                    <li class="list-group-item">🗃️ <a href="https://ropsten.etherscan.io/address/0x28285675fcc8750576C74bF5cA17529133804110#tokentxns" target="_blank">Token Explorer</a></li>
                 </ul>
                 <div class="modal fade" id="exchange" tabindex="-1" role="dialog" aria-labelledby="exchangeLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -50,11 +58,20 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Under construction...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger">Swap</button>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="ethInput">🔷 ETH</label>
+                                        <input type="text" class="form-control" id="ethInput" aria-describedby="ethInputHelp" value="0" oninput="ethInputChange();">
+                                        <small id="ethInputHelp" class="form-text text-muted">$0.00</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tokenOutput">🔮 ETHBPMN</label>
+                                        <input type="email" class="form-control" id="tokenOutput" value="0" oninput="tokenOutputChange();">
+                                    </div>
+                                    <a href="javascript:void(0);" class="badge badge-pill badge-danger" id="buy-btn" onclick="buyTokens();">Buy</a>
+                                    <br>
+                                    <a href="javascript:void(0);" class="badge badge-pill badge-success" id="sell-btn" onclick="sellTokens();">Sell</a>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -69,11 +86,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Get free ETHBPMN test tokens for the next 10 days of access
+                                Claim free ETHBPMN tokens to access the service
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" onclick="claimTokens();">Claim</button>
+                                <a href="javascript:void(0);" class="badge badge-pill badge-lite" data-dismiss="modal">Cancel</a>
+                                <a href="javascript:void(0);" class="badge badge-pill badge-danger" onclick="claimTokens();">Claim</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +98,6 @@
             </div>
             <div class="col-sm-8">
                 <form onsubmit="searchModel(); return false;" id="search-form" class="mb-2 mt-2">
-                    <span class="badge badge-pill badge-danger mb-2">Balance: <span id="user-balance">0</span> ETHBPMN</span>
                     <input type="text" class="form-control" id="search-text" placeholder="Search..." aria-describedby="searchHelp">
                     <small id="searchHelp" class="form-text text-muted">Search models by titles, annotations, and industries</small>
                 </form>

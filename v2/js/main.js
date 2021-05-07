@@ -16,8 +16,8 @@ const Web3Account = {
 };
 
 const ModelsContractDAO = {
-    address: "0x553dD151063378c4F7Ed39E6F3cA518eA53FC31B",
-    abi: `[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_from","type":"address"},{"indexed":true,"internalType":"address","name":"_to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"string","name":"_Title","type":"string"},{"internalType":"string","name":"_Link","type":"string"},{"internalType":"string","name":"_Hash","type":"string"},{"internalType":"string","name":"_Annotation","type":"string"},{"internalType":"string","name":"_Industry","type":"string"}],"name":"AddModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"ModelsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ReadModels","outputs":[{"components":[{"internalType":"string","name":"Title","type":"string"},{"internalType":"string","name":"Link","type":"string"},{"internalType":"string","name":"Hash","type":"string"},{"internalType":"string","name":"Annotation","type":"string"},{"internalType":"string","name":"Industry","type":"string"},{"internalType":"uint256","name":"DateTime","type":"uint256"}],"internalType":"struct ModelsCollection.ModelRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Timestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"buyTokens","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"claimAirdrop","outputs":[{"internalType":"uint256","name":"revenue","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]`,
+    address: "0x28285675fcc8750576C74bF5cA17529133804110",
+    abi: `[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_from","type":"address"},{"indexed":true,"internalType":"address","name":"_to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"string","name":"_title","type":"string"},{"internalType":"string","name":"_link","type":"string"},{"internalType":"string","name":"_hash","type":"string"},{"internalType":"string","name":"_annotation","type":"string"},{"internalType":"string","name":"_industry","type":"string"}],"name":"addModel","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"buyPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"buyTokens","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"claimAirdrop","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"deploymentTimestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"modelsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readModels","outputs":[{"components":[{"internalType":"string","name":"Title","type":"string"},{"internalType":"string","name":"Link","type":"string"},{"internalType":"string","name":"Hash","type":"string"},{"internalType":"string","name":"Annotation","type":"string"},{"internalType":"string","name":"Industry","type":"string"},{"internalType":"uint256","name":"DateTime","type":"uint256"}],"internalType":"struct ModelsCollection.ModelRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"sellPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"sellTokens","outputs":[{"internalType":"uint256","name":"revenue","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newPrice","type":"uint256"}],"name":"setBuyPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newPrice","type":"uint256"}],"name":"setSellPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"revenue","type":"uint256"}],"name":"withdrawFunds","outputs":[],"stateMutability":"nonpayable","type":"function"}]`,
 
     getBalance: function() {
         const web3 = new Web3(Web3Account.web3);
@@ -46,6 +46,47 @@ const ModelsContractDAO = {
         contract.methods.totalSupply().call(null, function(err, data) {
             if (err === null) {
                 $("#total-supply").text(data);
+                const tokensTotal = data;
+
+                contract.methods.buyPrice().call(null, function(err, data) {
+                    if (err === null) {
+                        const eth = tokensTotal * (data / 1000000000000000000);
+                        $("#total-cap").text(eth);
+
+                        $.get("https://api.coingecko.com/api/v3/coins/ethereum", function(data) {
+                            const usd = data.market_data.current_price.usd;
+                            $("#total-cap-usd").text((eth * usd).toFixed(2));
+                        });
+                    } else {
+                        alert(err);
+                    }
+                });
+            } else {
+                alert(err);
+            }
+        });
+    },
+
+    buyPrice: function(eth, output) {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.buyPrice().call(null, function(err, data) {
+            if (err === null) {
+                $(output).val(parseInt(eth * 1000000000000000000 / data));
+            } else {
+                alert(err);
+            }
+        });
+    },
+
+    sellPrice: function(token, output) {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.sellPrice().call(null, function(err, data) {
+            if (err === null) {
+                $(output).val(token * data / 1000000000000000000);
             } else {
                 alert(err);
             }
@@ -59,7 +100,27 @@ const ModelsContractDAO = {
         web3.eth.getBalance(contract.options.address).then(v => {
             const balance = v / 1000000000000000000;
             $("#liquidity").text(balance);
+
+            $.get("https://api.coingecko.com/api/v3/coins/ethereum", function(data) {
+                const usd = data.market_data.current_price.usd;
+                $("#liquidity-usd").text((balance * usd).toFixed(2));
+            });
         });
+    },
+
+    buyTokens: function(eth) {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.buyTokens().send({ from: Web3Account.address, value: (eth * 1000000000000000000) },
+            (e, d) => {});
+    },
+
+    sellTokens: function(tokens) {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.sellTokens(tokens).send({ from: Web3Account.address }, (e, d) => {});
     },
 
     readAllModels: function() {
@@ -73,7 +134,7 @@ const ModelsContractDAO = {
         $("#models-list").empty();
         $("#selected-model").empty();
 
-        contract.methods.ReadModels().call({ from: Web3Account.address }, function(err, data) {
+        contract.methods.readModels().call({ from: Web3Account.address }, function(err, data) {
             if (err === null) {
                 if (data.length < 1) {
                     alert("Insufficient balance! Buy ETHBPMN tokens in the exchange or claim through the airdrop!");
@@ -204,6 +265,7 @@ const loginUsingWeb3 = function() {
         $("#connect-web3").text(Web3Account.address.substring(0, 4) + "..." +
             Web3Account.address.substring(Web3Account.address.length - 4));
         ModelsContractDAO.getBalance();
+        ModelsContractDAO.readAllModels();
     }
 };
 
@@ -226,6 +288,22 @@ const searchModel = () => {
 
 const claimTokens = () => {
     ModelsContractDAO.claimTokens();
+};
+
+const ethInputChange = () => {
+    ModelsContractDAO.buyPrice($("#ethInput").val(), "#tokenOutput");
+};
+
+const tokenOutputChange = () => {
+    ModelsContractDAO.sellPrice($("#tokenOutput").val(), "#ethInput");
+};
+
+const buyTokens = () => {
+    ModelsContractDAO.buyTokens($("#ethInput").val());
+};
+
+const sellTokens = () => {
+    ModelsContractDAO.sellTokens($("#tokenOutput").val());
 };
 
 // ========================================== Event-handlers ===========================================
