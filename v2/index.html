@@ -45,17 +45,17 @@
         <br>
         <span class="badge badge-pill badge-lite mb-1">Cap</span>
         <span class="badge badge-pill badge-secondary mb-1"><span id="liquidity">0</span> ETH</span>
-        <span class="badge badge-pill badge-success mb-2">$ <span id="liquidity-usd">0</span></span>
+        <span class="badge badge-pill badge-success mb-2">$<span id="liquidity-usd">0</span></span>
         <br>
         <span class="badge badge-pill badge-lite mb-1">Volume</span>
         <span class="badge badge-pill badge-secondary mb-1"><span id="total-cap">0</span> ETH</span>
-        <span class="badge badge-pill badge-success mb-2">$ <span id="total-cap-usd">0</span></span>
+        <span class="badge badge-pill badge-success mb-2">$<span id="total-cap-usd">0</span></span>
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <span class="badge badge-pill badge-danger mt-1 mb-2">Balance: <span id="user-balance">0</span> ETHBPMN</span>
+                <span class="badge badge-pill badge-danger mt-4 mb-2">Balance: <span id="user-balance">0</span> ETHBPMN</span>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">🏠 <a href="../v2/index.html">Home</a></li>
                     <li class="list-group-item">💸 <a href="javascript:void(0);" data-toggle="modal" data-target="#exchange">Exchange</a></li>
@@ -64,6 +64,7 @@
                     <li class="list-group-item">🗃️ <a href="https://ropsten.etherscan.io/address/0x28285675fcc8750576C74bF5cA17529133804110#tokentxns" target="_blank">Token Explorer</a></li>
                     <li class="list-group-item">📇 <a href="https://github.com/freebpmnquality" target="_blank">Contact</a></li>
                 </ul>
+                <br>
                 <div class="modal fade" id="earn" tabindex="-1" role="dialog" aria-labelledby="earnLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -100,7 +101,7 @@
                                     <div class="form-group">
                                         <label for="ethInput">🔷 ETH</label>
                                         <input type="text" class="form-control" id="ethInput" aria-describedby="ethInputHelp" value="0" oninput="ethInputChange();">
-                                        <small id="ethInputHelp" class="form-text text-muted">$ <span id="ethUsd">0.00</span></small>
+                                        <small id="ethInputHelp" class="form-text text-muted">$<span id="ethUsd">0.00</span></small>
                                     </div>
                                     <div class="form-group">
                                         <label for="tokenOutput">🔮 ETHBPMN</label>
@@ -133,9 +134,42 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
             </div>
             <div class="col-sm-8">
-                <form onsubmit="searchModel(); return false;" id="search-form" class="mb-2 mt-2">
+                <div id="dashboard" class="mt-4">
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: #17a2b8;"><b>ETHBPMN Stats</b></h2>
+                                    <p class="card-text">
+                                        <span><b>Total models:</b> <span id="total-models">0</span></span>
+                                        <br>
+                                        <span><b>Required for access:</b> <span id="access-tokens">0</span> ETHBPMN</span>
+                                        <br>
+                                        <span><b>Reward per share:</b> 30 ETHBPMN</span>
+                                        <br>
+                                        <span><b>Reward per claim:</b> 1 ETHBPMN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: #17a2b8;"><b>ETHBPMN News</b></h2>
+                                    <p class="card-text">
+                                        <a class="twitter-timeline" data-height="500" href="https://twitter.com/freebpmnquality?ref_src=twsrc%5Etfw">Tweets by freebpmnquality</a>
+                                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form onsubmit="searchModel(); return false;" id="search-form" class="mb-4 mt-4">
                     <input type="text" class="form-control" id="search-text" placeholder="Search..." aria-describedby="searchHelp">
                     <small id="searchHelp" class="form-text text-muted">Search models by titles, annotations, and industries</small>
                 </form>
@@ -153,12 +187,11 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>

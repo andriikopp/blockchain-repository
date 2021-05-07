@@ -108,6 +108,33 @@ const ModelsContractDAO = {
         });
     },
 
+    modelsCount: function() {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.modelsCount().call(null, function(err, data) {
+            if (err === null) {
+                $("#total-models").text(data);
+            } else {
+                alert(err);
+            }
+        });
+    },
+
+    deploymentTimestamp: function() {
+        const web3 = new Web3(Web3Account.web3);
+        const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
+
+        contract.methods.deploymentTimestamp().call(null, function(err, data) {
+            if (err === null) {
+                const required = ((new Date().getTime() / 1000) - data) / 86400;
+                $("#access-tokens").text(required.toFixed(2));
+            } else {
+                alert(err);
+            }
+        });
+    },
+
     buyTokens: function(eth) {
         const web3 = new Web3(Web3Account.web3);
         const contract = new web3.eth.Contract(JSON.parse(this.abi), this.address);
@@ -138,6 +165,7 @@ const ModelsContractDAO = {
             if (err === null) {
                 if (data.length < 1) {
                     $("#search-form").hide();
+                    $("#dashboard").show();
                     alert("Insufficient balance! Buy ETHBPMN tokens in the exchange or claim through the airdrop!");
                 }
 
@@ -267,6 +295,7 @@ const loginUsingWeb3 = function() {
             Web3Account.address.substring(Web3Account.address.length - 4));
         ModelsContractDAO.getBalance();
         $("#search-form").show();
+        $("#dashboard").hide();
         ModelsContractDAO.readAllModels();
     }
 };
@@ -326,5 +355,7 @@ $("#use-sha256").click(encryptSHA256);
 
 ModelsContractDAO.totalSupply();
 ModelsContractDAO.liquidity();
+ModelsContractDAO.modelsCount();
+ModelsContractDAO.deploymentTimestamp();
 
 $("#search-form").hide();
