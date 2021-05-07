@@ -194,7 +194,7 @@ const ModelsContractDAO = {
                         $("#models-list").append(`<a href="javascript:void(0);" 
                             class="list-group-item list-group-item-action" 
                             onclick="showModelData('${title}', '${link}', '${hash}', 
-                            '${annotation}', '${industry}', '${timestamp}');" data-toggle="list">${title}</a>`);
+                            '${annotation}', '${industry}', '${timestamp}');" data-toggle="list">💠 ${title}</a>`);
                     }
                 }
             } else {
