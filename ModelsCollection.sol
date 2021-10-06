@@ -55,9 +55,9 @@ contract ModelsCollection {
         );
     }
 
-    function SetPermission(address _User, bool _Access) public {
+    function SetPermission(address _User, bool _Permission) public {
         if (msg.sender == Owner && _User != Owner) {
-            Permissions[_User] = _Access;
+            Permissions[_User] = _Permission;
         }
     }
 
@@ -84,28 +84,23 @@ contract ModelsCollection {
         string memory _Annotation,
         string memory _Industry
     ) public {
-        if (msg.sender == Owner) {
-            ModelRecord memory _Model =
-                ModelRecord(
-                    _Title,
-                    _Link,
-                    _Hash,
-                    _Annotation,
-                    _Industry,
-                    block.timestamp
-                );
-            Models.push(_Model);
-            ModelsCount++;
-        }
+        require(Permissions[msg.sender]);
+
+        ModelRecord memory _Model = ModelRecord(
+            _Title,
+            _Link,
+            _Hash,
+            _Annotation,
+            _Industry,
+            block.timestamp
+        );
+
+        Models.push(_Model);
+        ModelsCount++;
     }
 
     function ReadModels() public view returns (ModelRecord[] memory) {
-        if (Permissions[msg.sender]) {
-            return Models;
-        }
-
-        ModelRecord[] memory _Empty;
-        return _Empty;
+        return Models;
     }
 
     function GetModelsCount() public view returns (uint256) {
