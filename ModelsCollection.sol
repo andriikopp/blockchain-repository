@@ -28,28 +28,28 @@ contract ModelsCollection {
         AddModel(
             "Dispatch of goods",
             "https://raw.githubusercontent.com/freebpmnquality/bpmn_structuredness/main/input/dispatch.bpmn",
-            "15a7b75c6e6940754d4dc69f185ce208a4429c420261c1fd7fe4abd7c73ef1d2",
+            "fb96d72d6c03821022ba871c1727fc124067c502892c07bfc5fe1d6b99639282",
             "This process happens at a small hardware company that ships small amounts of goods to end customers but as well big amounts to other shops",
             "Sales"
         );
         AddModel(
             "Recourse",
             "https://raw.githubusercontent.com/freebpmnquality/bpmn_structuredness/main/input/recourse.bpmn",
-            "a23349cfea74c81484efb3a61f6d7473fad27a3d214c33fde99fec0bacebcf6f",
+            "b89dfb71b3cfb290d911c6a87fdb1b974a90f5a636613336723c7c494ac41e3a",
             "Insurants can be forced to pay back money they received from the insurance company for different reasons. This is called recourse. Here the clerk describes how this process works",
             "Insurance"
         );
         AddModel(
             "Credit scoring",
             "https://raw.githubusercontent.com/freebpmnquality/bpmn_structuredness/main/input/scoring.bpmn",
-            "ef9571cdf6566d66bb94aa00d22a6e21e4686f155662b72b619050180f96d12c",
+            "afed6928c5c0498907d2ae5d1290b73baecbed89b07318a8f252b590b276456b",
             "A credit protection agency allows customers to query a credit rating for persons via a technical interface.",
             "Finance"
         );
         AddModel(
             "Self-service restaurant",
             "https://raw.githubusercontent.com/freebpmnquality/bpmn_structuredness/main/input/restaurant.bpmn",
-            "45e8aa48ec7ad8d9bb7ef53df22aac59d47601d20fd5955f93ae189974358d7b",
+            "b300e7942d96b6d3a97f6f9a638ab4181c43f0aea84405de558b4624126a095e",
             "A self-service restaurant is under chaotic conditions. Guests place their order at the till and receive their meals on call from the kitchen. As the restaurant is very popular, the processes need to be adapted to the increasing visitor numbers. In future, guests should only be in touch with one member of staff for their order. The chef should purely be concentrating on preparing the meals. Buzzers will be introduced to signalise to customers when their order has been completed.",
             "Public Catering"
         );
