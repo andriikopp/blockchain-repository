@@ -1,3 +1,3 @@
 # blockchain-repository
  
-Distributed Business Process Model Repository
+Decentralized Business Process Model Repository
