@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Primary Meta Tags -->
+    <title>EtherBPMN NFT — Decentralized Storage of Tokenized Process Models</title>
+    <meta name="title" content="EtherBPMN NFT — Decentralized Storage of Tokenized Process Models">
+    <meta name="description" content="Inter-organizational storage of tokenized business process models with the proof of authorship, censorship resistance, timestamping, and immutability.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EtherBPMN NFT — Decentralized Storage of Tokenized Process Models">
+    <meta property="og:description" content="Inter-organizational storage of tokenized business process models with the proof of authorship, censorship resistance, timestamping, and immutability.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="EtherBPMN NFT — Decentralized Storage of Tokenized Process Models">
+    <meta property="twitter:description" content="Inter-organizational storage of tokenized business process models with the proof of authorship, censorship resistance, timestamping, and immutability.">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png" />
+</head>
+
+<body>
+    <!-- Top navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">
+            <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""> EtherBPMN NFT
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#publishModal" style="font-weight: bold;">Publish a model</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#contactsModal" style="font-weight: bold;">Publish your contacts</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://ropsten.etherscan.io/token/0xabc33640b17def441cfb455efa1c3f8f490f4616" target="_blank" style="font-weight: bold;">Etherscan tracker</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" onclick="toggleDark();">🌃</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" onclick="toggleLight();">☀️</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="text-center mt-4 mb-4">
+        <h1 class="mr-3 ml-3">EtherBPMN NFT — Decentralized Storage of Tokenized Process Models</h1>
+        <p class="mr-4 ml-4" style="font-weight: bold;">Inter-organizational storage of tokenized business process models with the proof of authorship, censorship resistance, timestamping, and immutability.</p>
+    </div>
+
+    <!-- Model publishing window -->
+    <div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="publishModalLabel">Publish a model</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="modelURI">Model URI</label>
+                        <textarea class="form-control" id="modelURI" rows="3" onchange="findSHA256();" style="border-radius: 1rem;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="URIHash">URI hash (SHA-256 is calculated automatically, use <a href="https://emn178.github.io/online-tools/sha256.html" target="_blank">this tool</a> to check or re-calculate)</label>
+                        <textarea class="form-control" id="URIHash" rows="3" style="border-radius: 1rem;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="statementsNum">Number of statements</label>
+                        <input type="number" min="0" step="1" class="form-control" id="statementsNum" style="border-radius: 1rem;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="syntInvalidNum">Number of syntactically invalid statements</label>
+                        <input type="number" min="0" step="1" class="form-control" id="syntInvalidNum" aria-describedby="syntInvalidNumHelp" style="border-radius: 1rem;">
+                        <small id="syntInvalidNumHelp" class="form-text text-muted">Statements are not part of the BPMN notation.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="syntIncompleteNum">Number of syntactically incomplete statements</label>
+                        <input type="number" min="0" step="1" class="form-control" id="syntIncompleteNum" aria-describedby="syntIncompleteNumHelp" style="border-radius: 1rem;">
+                        <small id="syntIncompleteNumHelp" class="form-text text-muted">Statements do not obey the BPMN syntax.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semInvalidNum">Number of semantically invalid statements</label>
+                        <input type="number" min="0" step="1" class="form-control" id="semInvalidNum" aria-describedby="semInvalidNumHelp" style="border-radius: 1rem;">
+                        <small id="semInvalidNumHelp" class="form-text text-muted">Statements are not part of the modeling domain.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="semIncompleteNum">Number of semantically incomplete statements</label>
+                        <input type="number" min="0" step="1" class="form-control" id="semIncompleteNum" aria-describedby="semIncompleteNumHelp" style="border-radius: 1rem;">
+                        <small id="semIncompleteNumHelp" class="form-text text-muted">Statements are not correct or relevant about the modeling domain.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 1rem; font-weight: bold;">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="publishModel();" style="border-radius: 1rem; font-weight: bold;">Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacts publishing window -->
+    <div class="modal fade" id="contactsModal" tabindex="-1" role="dialog" aria-labelledby="contactsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactsModalLabel">Publish your contacts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="contactsInfo">Contacts information</label>
+                        <textarea class="form-control" id="contactsInfo" rows="3" aria-describedby="contactsInfoHelp" style="border-radius: 1rem;"></textarea>
+                        <small id="contactsInfoHelp" class="form-text text-muted">Help collaborators to reach you in the real world.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 1rem; font-weight: bold;">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="publishContacts();" style="border-radius: 1rem; font-weight: bold;">Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacts information -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Address contacts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="addressContacts">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Identity information -->
+    <div class="modal fade" id="identityModal" tabindex="-1" role="dialog" aria-labelledby="identityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="identityModalLabel">Check identity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="identityData">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom navbar -->
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">
+            EtherBPMN NFT by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, 
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a>
+        </span>
+    </nav>
+
+    <!-- Published models -->
+    <div class="card-columns mt-4" id="tokens">
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <!-- Hidden modals of model pictures -->
+    <div id="modals"></div>
+
+    <!-- JS libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Web3 -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+
+    <!-- Application scripts -->
+    <script src="index.js"></script>
+</body>
+
+</html>
