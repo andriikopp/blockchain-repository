@@ -1,5 +1,5 @@
 // Contract address
-const contractAddress = '0xabc33640b17def441cfb455efa1c3f8f490f4616';
+const contractAddress = '0x3d5ad8ad8a40e1dfb0ea8254ad2e68df66b3dd87';
 
 // Contract ABI
 const contractABI = JSON.parse(`[
