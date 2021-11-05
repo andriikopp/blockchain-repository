@@ -710,24 +710,6 @@ const publishContacts = () => {
 
 /**
  * 
- * Toggle the dark mode.
- * 
- */
-const toggleDark = () => {
-    $('html').attr('style', '-webkit-filter: invert(100%); background-color: black;');
-};
-
-/**
- * 
- * Toggle the dark mode.
- * 
- */
-const toggleLight = () => {
-    $('html').attr('style', '-webkit-filter: invert(0%); background-color: white;');
-};
-
-/**
- * 
  * Get address contacts.
  * 
  */
